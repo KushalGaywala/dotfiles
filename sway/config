@@ -1,0 +1,317 @@
+# import theme
+include config.d/themes/catppuccin-mocha
+
+# Default config for sway
+### variables
+#
+# logo key. use mod1 for alt.
+set $mod mod4
+set $mod1 mod1
+# home row direction keys, like vim
+set $left h
+set $down j
+set $up k
+set $right l
+# your preferred terminal emulator
+set $term alacritty
+set $coolretroterm cool-retro-term
+
+# your preferred application launcher
+# note: pass the final command to swaymsg so that the resulting window can be opened
+# on the original workspace that the command was run one
+set $menu bemenu-run --list 3 --prompt '>' --ignorecase
+# set $menu dmenu_path | dmenu | xargs swaymsg exec --
+# move mouse
+set $movemouse movemouse
+# sway navigation mode
+set $nag exec swaynagmode
+
+# output configurations
+include config.d/custom/output.conf
+
+# clipboard config for all windows
+exec wl-paste -t text --watch clipman store --no-persist
+## for primary clipboard support
+exec wl-paste -p -t text --watch clipman store -p --histpath="~/.local/share/clipman-primary.json"
+
+### idle configuration
+#
+# example configuration:
+#
+# exec swayidle -w \
+#          timeout 300 'swaylock -f -c 000000' \
+#          timeout 600 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
+#          before-sleep 'swaylock -f -c 000000'
+#
+# this will lock your screen after 300 seconds of inactivity, then turn off
+# your displays after another 300 seconds, and turn your screens back on when
+# resumed. it will also lock your screen before your computer goes to sleep.
+
+### input configuration
+input type:touchpad {
+	dwt enabled
+	tap enabled
+	natural_scroll disabled
+	middle_emulation enabled
+}
+
+# Mouse settings
+input 1118:2083:Microsoft_Microsoft___Classic_IntelliMouse__ {
+    dwt enabled
+    accel_profile "flat"
+    pointer_accel 0.9
+}
+
+# follow_focus|follow_cursor true|false|toggle
+input 10429:2352:UGTABLET_4_inch_PenTablet {
+    tool_mode * relative
+}
+
+bindsym $mod1+Shift+2 input 10429:2352:UGTABLET_4_inch_PenTablet tool_mode * relative; input 10429:2352:UGTABLET_4_inch_PenTablet map_to_output HDMI-A-1
+bindsym $mod1+Shift+1 input 10429:2352:UGTABLET_4_inch_PenTablet tool_mode * absolute; input 10429:2352:UGTABLET_4_inch_PenTablet map_to_output EDP-1
+
+# You can get the names of your inputs by running: swaymsg -t get_inputs
+# Read `man 5 sway-input` for more information about this section.
+
+### Key bindings
+#
+# Basics:
+#
+    # Start a terminal
+    bindsym $mod+Return exec $term
+    bindsym $mod+Shift+Return exec $coolretroterm
+
+    # Kill focused window
+    bindsym $mod+Shift+q kill
+
+    # Start your launcher
+    bindsym $mod+d exec $menu
+
+    # Drag floating windows by holding down $mod and left mouse button.
+    # Resize them with right mouse button + $mod.
+    # Despite the name, also works for non-floating windows.
+    # Change normal to inverse to use left mouse button for resizing and right
+    # mouse button for dragging.
+    floating_modifier $mod normal
+    focus_follows_mouse always
+
+    # Reload the configuration file
+    bindsym $mod+Shift+c reload
+
+    # Exit sway (logs you out of your Wayland session)
+    bindsym $mod+Shift+z exit
+#
+# Moving around:
+#
+    # Move your focus around
+    bindsym $mod+$left focus left exec $movemouse
+    bindsym $mod+$down focus down exec $movemouse
+    bindsym $mod+$up focus up exec $movemouse
+    bindsym $mod+$right focus right exec $movemouse
+    # Or use $mod+[up|down|left|right]
+    bindsym $mod+Left focus left
+    bindsym $mod+Down focus down
+    bindsym $mod+Up focus up
+    bindsym $mod+Right focus right
+
+    # Move the focused window with the same, but add Shift
+    bindsym $mod+Shift+$left move left
+    bindsym $mod+Shift+$down move down
+    bindsym $mod+Shift+$up move up
+    bindsym $mod+Shift+$right move right
+    # Ditto, with arrow keys
+    bindsym $mod+Shift+Left move left
+    bindsym $mod+Shift+Down move down
+    bindsym $mod+Shift+Up move up
+    bindsym $mod+Shift+Right move right
+#
+#
+    # Switch to workspace
+    bindsym $mod+1 workspace number 1
+    bindsym $mod+2 workspace number 2
+    bindsym $mod+3 workspace number 3
+    bindsym $mod+4 workspace number 4
+    bindsym $mod+5 workspace number 5
+    bindsym $mod+6 workspace number 6
+    bindsym $mod+7 workspace number 7
+    bindsym $mod+8 workspace number 8
+    bindsym $mod+9 workspace number 9
+    bindsym $mod+0 workspace number 10
+    # Move focused container to workspace
+    bindsym $mod+Shift+1 move container to workspace number 1
+    bindsym $mod+Shift+2 move container to workspace number 2
+    bindsym $mod+Shift+3 move container to workspace number 3
+    bindsym $mod+Shift+4 move container to workspace number 4
+    bindsym $mod+Shift+5 move container to workspace number 5
+    bindsym $mod+Shift+6 move container to workspace number 6
+    bindsym $mod+Shift+7 move container to workspace number 7
+    bindsym $mod+Shift+8 move container to workspace number 8
+    bindsym $mod+Shift+9 move container to workspace number 9
+    bindsym $mod+Shift+0 move container to workspace number 10
+    # Note: workspaces can have any name you want, not just numbers.
+    # We just use 1-10 as the default.
+
+# Python envs mode to toggle when 
+mode "python.env" {
+    # For Global Env
+    bindsym g exec source ~/.config/sway/config.d/setpyenv.sh g; exec $term; mode "default"
+    # For NLP. Trans.
+    bindsym t exec source ~/.config/sway/config.d/setpyenv.sh t; exec $term; mode "default"
+    # For Generateive NN
+    bindsym n exec source ~/.config/sway/config.d/setpyenv.sh n; exec $term; mode "default"
+    # For Comp. Vis.: 3D Recons.
+    bindsym c exec source ~/.config/sway/config.d/setpyenv.sh c; exec $term; mode "default"
+    # For LLMCoder
+    bindsym l exec source ~/.config/sway/config.d/setpyenv.sh l; exec $term; mode "default"
+    # For Multilspy
+    bindsym m exec source ~/.config/sway/config.d/setpyenv.sh m; exec $term; mode "default"
+
+    # To deactivate an environment
+    bindsym s exec source ~/.config/sway/config.d/setpyenv.sh; exec $term; mode "default"
+
+    # Return to default mode
+    bindsym $down+$up mode "default"
+    bindsym Space mode "default"
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+# To enter python mode
+bindsym $mod+Shift+p mode "python.env"
+
+mode "print" {
+    # default is png
+    # Get the image and copy to clipboard to paste into some app
+    bindsym y exec "grim -g "$(slurp)" - | wl-copy"; mode "default"
+    # Get the image and save into the mentioned location as png
+    bindsym s exec 'grim -g "$(slurp)" ~/Media/Screenshots/$(date +"%Y%m%d%H%M%S").png'; mode "default"
+    bindsym f exec 'grim -g ~/Media/Screenshots/$(date +"%Y%m%d%H%M%S").png'
+
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+    bindsym $mod+Shift+s mode "default"
+}
+bindsym $mod+Shift+s mode "print"
+
+# Layout stuff:
+bindsym $mod+b splith
+bindsym $mod+v splitv
+# Switch the current container between different layout styles
+bindsym $mod+s layout stacking
+bindsym $mod+w layout tabbed
+bindsym $mod+e layout toggle split
+# Make the current focus fullscreen
+bindsym $mod+f fullscreen
+# Toggle the current focus between tiling and floating mode
+bindsym $mod+Shift+space floating toggle
+# Swap focus between the tiling area and the floating area
+bindsym $mod+space focus mode_toggle
+# Move focus to the parent container
+bindsym $mod+a focus parent
+
+# Scratchpad:
+bindsym $mod+Shift+minus move scratchpad
+bindsym $mod+minus scratchpad show
+
+# Resizing containers:
+mode "resize" {
+    bindsym $left resize shrink width 10px
+    bindsym $down resize grow height 10px
+    bindsym $up resize shrink height 10px
+    bindsym $right resize grow width 10px
+    # Ditto, with arrow keys
+    bindsym Left resize shrink width 10px
+    bindsym Down resize grow height 10px
+    bindsym Up resize shrink height 10px
+    bindsym Right resize grow width 10px
+    # Return to default mode
+    bindsym $down+$up mode "default"
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+bindsym $mod+r mode "resize"
+
+# Keybinding for volume
+bindsym XF86AudioRaiseVolume exec amixer sset Master 1%+
+bindsym XF86AudioLowerVolume exec amixer sset Master 1%-
+bindsym XF86AudioMute exec amixer sset Master toggle
+mode "headphone" {
+    bindsym p exec amixer sset Headphone 1%+
+    bindsym n exec amixer sset Headphone 1%-
+    bindsym m exec amixer sset Headphone toggle
+    # Return to default mode
+    bindsym $down+$up mode "default"
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+bindsym $mod+Shift+d mode "headphone"
+mode "speaker" {
+    # Speaker Volume
+    bindsym p exec amixer sset Speaker 1%+
+    bindsym n exec amixer sset Speaker 1%-
+    bindsym m exec amixer sset Speaker toggle
+    # Return to default mode
+    bindsym $down+$up mode "default"
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+bindsym $mod+Shift+f mode "speaker"
+bindsym $mod+v+p exec amixer sset Master 1%+
+bindsym $mod+v+n exec amixer sset Master 1%-
+bindsym $mod+v+m exec amixer sset Master toggle
+
+# Keybinding for Brightness
+bindsym XF86MonBrightnessDown exec brightnessctl set 1%-
+bindsym XF86MonBrightnessUp exec brightnessctl set 1%+
+bindsym $mod+b+m exec brightnessctl set 1%-
+bindsym $mod+b+p exec brightnessctl set 1%+
+
+# Remove title-bar
+font nerd:FiraCode 9
+default_border pixel 0
+default_floating_border normal
+# Hide vertical edges
+hide_edge_borders both 
+# Move mouse to focused container
+mouse_warping container
+
+# Exit mode configuration
+mode "exit" {
+	bindsym p exec systemctl poweroff
+	bindsym r exec systemctl reboot
+
+	bindsym Return mode "default"
+	bindsym Escape mode "default"
+	bindsym $mod+Shift+e mode "default"
+}
+bindsym $mod+Shift+e mode "exit"
+
+# target                 title     bg    text   indicator  border
+client.focused           $lavender $base $text  $rosewater $lavender
+client.focused_inactive  $overlay0 $base $text  $rosewater $overlay0
+client.unfocused         $overlay0 $base $text  $rosewater $overlay0
+client.urgent            $peach    $base $peach $overlay0  $peach
+client.placeholder       $overlay0 $base $text  $overlay0  $overlay0
+client.background        $base
+
+# bar
+bar {
+    status_command	while /usr/bin/python3.11 ~/.config/sway/config.d/scripts/statuscommand.py; do sleep 1; done
+    position 		bottom
+    workspace_buttons	yes
+    tray_output		none
+    colors {
+	background         $base
+	statusline         $text
+	focused_statusline $text
+	active_workspace   $base $text $blue
+	focused_separator  $base
+	focused_workspace  $pink $blue $surface1
+	active_workspace   $base $base $blue
+	inactive_workspace $base $base $surface1
+	urgent_workspace   $base $pink $surface1
+	binding_mode       $base $pink $surface1
+    }
+}
+
+include /etc/sway/config.d/*
+# Default config for sway
