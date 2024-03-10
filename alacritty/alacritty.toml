@@ -1,0 +1,28 @@
+import = [
+    "~/.config/alacritty/config.d/themes/catppuccin-mocha.toml"
+]
+
+[font]
+size = 9
+
+[font.bold]
+family = "FiraCodeNerdFont"
+style = "Bold"
+
+[font.bold_italic]
+family = "FiraCodeNerdFontItalicBold"
+style = "Bold Italic"
+
+[font.italic]
+family = "FiraCodeNerdFont"
+style = "Italic"
+
+[font.normal]
+family = "FiraCodeNerdFont"
+style = "Medium"
+
+[env]
+term = "xterm-256color"
+
+[window]
+decorations = "none"
