@@ -1,0 +1,134 @@
+{
+  "workbench.editorAssociations": {
+    "*.zip": "default"
+  },
+  "vim.camelCaseMotion.enable": true,
+  "vim.enableNeovim": true,
+  "vim.handleKeys": {
+    "<C-d>": true,
+    "<C-s>": false,
+    "<C-z>": false
+  },
+  "vim.insertModeKeyBindings": [
+    {
+      "before": [
+        "j",
+        "k"
+      ],
+      "after": [
+        "<Esc>"
+      ]
+    }
+  ],
+  "vim.normalModeKeyBindings": [
+    {
+      "before": [
+        "<leader>",
+        "w"
+      ],
+      "commands": [
+        "workbench.action.files.save"
+      ]
+    },
+    {
+      "before": [
+        "<ctrl>",
+        "w"
+      ],
+      "commands": [
+        "workbench.action.closeActiveEditor"
+      ]
+    },
+    {
+      "before": [
+        "<leader>",
+        "w"
+      ],
+      "commands": [
+        "workbench.action.group.focusNextGroup"
+      ]
+    },
+    {
+      "before": [
+        "<leader>",
+        "n"
+      ],
+      "commands": [
+        ":nohlsearch",
+        "<CR>"
+      ]
+    }
+  ],
+  "editor.unicodeHighlight.invisibleCharacters": true,
+  "editor.formatOnSave": false,
+  "github.copilot.enable": {
+    "*": true,
+    "plaintext": true,
+    "markdown": true,
+    "scminput": true,
+    "python": true
+  },
+  "editor.minimap.enabled": false,
+  "editor.fontVariations": false,
+  "workbench.layoutControl.type": "both",
+  "workbench.activityBar.location": "hidden",
+  "workbench.colorTheme": "Catppuccin Mocha",
+  "editor.fontFamily": "'Fira Code', 'Droid Sans Mono', 'monospace', monospace",
+  "editor.fontLigatures": true,
+  "vim.easymotion": true,
+  "vim.incsearch": true,
+  "vim.useSystemClipboard": true,
+  "vim.useCtrlKeys": true,
+  "vim.hlsearch": true,
+  "vim.normalModeKeyBindingsNonRecursive": [
+    {
+      "before": [
+        "<leader>",
+        "d"
+      ],
+      "after": [
+        "d",
+        "d"
+      ]
+    },
+    {
+      "before": [
+        "<C-n>"
+      ],
+      "commands": [
+        ":nohl"
+      ]
+    },
+    {
+      "before": [
+        "K"
+      ],
+      "commands": [
+        "lineBreakInsert"
+      ],
+      "silent": true
+    }
+  ],
+  "vim.leader": "<space>",
+  "to.improve.performance": "// To improve performance",
+  "extensions.experimental.affinity": {
+    "vscodevim.vim": 1
+  },
+  "html.format.enable": false,
+  "html.format.preserveNewLines": false,
+  "html.hover.references": false,
+  "html.suggest.html5": false,
+  "html.hover.documentation": false,
+  "html.validate.scripts": false,
+  "html.validate.styles": false,
+  "prettier.useEditorConfig": false,
+  "github.copilot.editor.enableAutoCompletions": true,
+  "git.autofetch": true,
+  "git.openRepositoryInParentFolders": "never",
+  "extensions.ignoreRecommendations": true,
+  "jupyter.askForKernelRestart": false,
+  "python.defaultInterpreterPath": "/home/kushal/.config/python.env/nlptrans.env",
+  "workbench.iconTheme": "catppuccin-mocha",
+  "window.zoomLevel": -1,
+  "editor.indentSize": "tabSize"
+}
